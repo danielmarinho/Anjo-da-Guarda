@@ -60,11 +60,13 @@ void loop(){
         
   
   if(valor == 0 || valor == 1){//Os 2 primeiros valores significam que a leitura foi mais forte entao fogo proximo
-      Serial.println("Fogo proximo!");
+      //Serial.println("Fogo proximo!");
+      Serial.println("0");
       tone(buzzer, 300, 1000);
   }
   else if(valor == 2){//No 3o valor fogo distante (ou esta captando a luz solar por engano, nao avisar)
-    Serial.println("Fogo distante ou Luz Solar");
+    //Serial.println("Fogo distante ou Luz Solar");
+    Serial.println("1");
   }
   
   delay(1);  // delay entre as leituras em milisegundos
@@ -80,32 +82,33 @@ void loop(){
        if(lockLow){  
          //esperar sensor ir para LOW antes de passar informacao
          lockLow = false;            
-         Serial.println("---");
-         Serial.print("movimento detectado em ");
-         Serial.print(millis()/1000);
-         Serial.println(" segundo(s)"); 
+         //Serial.println("---");
+         //Serial.print("movimento detectado em ");
+         //Serial.print(millis()/1000);
+         //Serial.println(" segundo(s)");
+        Serial.println("2"); 
          delay(50);
          }         
          takeLowTime = true;
        }
 
-     if(digitalRead(pirPin) == LOW){       
-       digitalWrite(ledPin, LOW);
-
-       if(takeLowTime){
-        lowIn = millis();          //salva quanto tempo demorou para mudar de HIGH para LOW save the time of the transition from high to LOW
-        takeLowTime = false;       //faz com que seja feito somente quando comecar uma fase LOW
-        }
-       //se o sensor ficar em LOW por mais tempo que a pausa definida, nos assumimos que nao havera mais movimento
-       
-       if(!lockLow && millis() - lowIn > pause){  
-           //faz com que esse bloco de codigo seja executado somente depois que um novo movimento for detectado
-           lockLow = true;                        
-           Serial.print("movimento finalizado em ");
-           Serial.print((millis() - pause)/1000);
-           Serial.println(" segundo(s)");
-           delay(50);
-           }
-       }
+//     if(digitalRead(pirPin) == LOW){       
+//       digitalWrite(ledPin, LOW);
+//
+//       if(takeLowTime){
+//        lowIn = millis();          //salva quanto tempo demorou para mudar de HIGH para LOW save the time of the transition from high to LOW
+//        takeLowTime = false;       //faz com que seja feito somente quando comecar uma fase LOW
+//        }
+//       //se o sensor ficar em LOW por mais tempo que a pausa definida, nos assumimos que nao havera mais movimento
+//       
+//       if(!lockLow && millis() - lowIn > pause){  
+//           //faz com que esse bloco de codigo seja executado somente depois que um novo movimento for detectado
+//           lockLow = true;                        
+//           Serial.print("movimento finalizado em ");
+//           Serial.print((millis() - pause)/1000);
+//           Serial.println(" segundo(s)");
+//           delay(50);
+//           }
+//       }
   }
 
